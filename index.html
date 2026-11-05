@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="LizParKs : la checklist des parcs d'attraction du monde entier." />
+    <meta name="theme-color" content="#0a0a0a" />
+    <title>Parcs d'attraction · LizParKs</title>
+
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" href="./icons/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="LizParKs" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <p class="hero__kicker">LizParKs · Checklist</p>
+      <h1 class="hero__title">Parcs<span> d'attraction</span></h1>
+      <p class="hero__subtitle">Coche chaque parc que tu as franchi. Attache ta ceinture !</p>
+      <button id="install" type="button" class="btn hero__install" hidden>Installer l'appli</button>
+    </header>
+
+    <main id="main" class="container">
+      <nav class="tabs" aria-label="Sections">
+        <a href="#parcs" class="tabs__link" data-view="parcs" aria-current="page">Checklist</a>
+        <a href="#recap" class="tabs__link" data-view="recap">Récap budget<span class="segmented__count" data-count="recap"></span></a>
+      </nav>
+
+      <div data-view-panel="parcs">
+      <section class="panel" aria-label="Recherche et filtres">
+        <div class="toolbar">
+          <div class="field field--search">
+            <label for="search">Rechercher</label>
+            <input id="search" type="search" placeholder="Nom, ville ou pays…" autocomplete="off" />
+          </div>
+          <div class="field">
+            <label for="country">Pays</label>
+            <select id="country"></select>
+          </div>
+          <div class="field">
+            <label for="sort">Trier par</label>
+            <select id="sort">
+              <option value="country">Pays</option>
+              <option value="name">Nom</option>
+              <option value="price-asc">Prix croissant</option>
+              <option value="price-desc">Prix décroissant</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field filters">
+          <span id="visit-filter-label" class="field__caption">Afficher</span>
+          <div class="segmented" role="group" aria-labelledby="visit-filter-label">
+            <button type="button" class="segmented__btn" data-filter="all" aria-pressed="true">Tous<span class="segmented__count" data-count="all"></span></button>
+            <button type="button" class="segmented__btn" data-filter="visited" aria-pressed="false">Visités<span class="segmented__count" data-count="visited"></span></button>
+            <button type="button" class="segmented__btn" data-filter="todo" aria-pressed="false">À visiter<span class="segmented__count" data-count="todo"></span></button>
+          </div>
+        </div>
+
+        <div class="progress">
+          <div class="progress__meta">
+            <p id="progress-label" class="progress__label">Chargement…</p>
+            <p id="global-label" class="progress__global"></p>
+          </div>
+          <div class="progress__bar" role="progressbar" aria-label="Progression de la sélection" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <span id="progress-fill" class="progress__fill"></span>
+          </div>
+          <p id="results-count" class="results" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <ul id="parks" class="grid" aria-label="Liste des parcs"></ul>
+
+      <div id="empty" class="empty" hidden>
+        <p id="empty-text" class="empty__text"></p>
+        <button id="clear-filters" type="button" class="btn">Réinitialiser les filtres</button>
+      </div>
+      </div>
+
+      <section class="panel recap" data-view-panel="recap" aria-labelledby="recap-title" hidden>
+        <h2 id="recap-title" class="recap__title">Récap budget</h2>
+        <p class="recap__note">
+          Estimation pour 2 adultes, billet 1 jour au guichet, converti en euros. Les prix réels varient
+          selon la saison et les offres en ligne.
+        </p>
+
+        <p id="recap-empty" class="empty__text">Aucun parc visité pour l'instant. En route pour le premier looping !</p>
+
+        <div id="recap-content" hidden>
+          <dl class="stats">
+            <div class="stats__item stats__item--main">
+              <dt>Total dépensé</dt>
+              <dd id="recap-total"></dd>
+            </div>
+            <div class="stats__item">
+              <dt>Parcs visités</dt>
+              <dd id="recap-count"></dd>
+            </div>
+            <div class="stats__item">
+              <dt>Moyenne par parc</dt>
+              <dd id="recap-average"></dd>
+            </div>
+            <div class="stats__item">
+              <dt>Le plus cher</dt>
+              <dd id="recap-max"></dd>
+            </div>
+            <div class="stats__item">
+              <dt>Le moins cher</dt>
+              <dd id="recap-min"></dd>
+            </div>
+          </dl>
+
+          <h3 class="recap__subtitle">Par tranche de prix (pour 2)</h3>
+          <ul id="recap-brackets" class="brackets"></ul>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="actions actions--prefs" role="group" aria-label="Préférences">
+        <button id="toggle-animations" type="button" class="btn btn--toggle" aria-pressed="true">
+          Animations<span class="btn__state" aria-hidden="true"></span>
+        </button>
+        <button id="toggle-sound" type="button" class="btn btn--toggle" aria-pressed="false">
+          Son<span class="btn__state" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="actions">
+        <button id="export" type="button" class="btn">Exporter</button>
+        <button id="import-trigger" type="button" class="btn">Importer</button>
+        <input id="import" type="file" accept=".json,application/json" hidden />
+        <button id="surprise" type="button" class="btn">Mission du jour</button>
+        <button id="reset" type="button" class="btn btn--danger">Tout réinitialiser</button>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+      <p class="hint">Astuce : <kbd>Échap</kbd> arrête le feu d'artifice.</p>
+      <p class="hint"><a href="./confidentialite.html">Confidentialité</a></p>
+    </footer>
+    <p id="announcer" class="sr-only" aria-live="polite"></p>
+
+    <dialog id="install-help" class="dialog" aria-labelledby="install-help-title">
+      <h2 id="install-help-title" class="dialog__title">Installer LizParKs</h2>
+      <ol class="dialog__steps">
+        <li>Touche le bouton <strong>Partager</strong> (le carré avec une flèche vers le haut) : en bas dans Safari, en haut à droite dans Chrome.</li>
+        <li>Choisis <strong>Sur l'écran d'accueil</strong>.</li>
+        <li>Touche <strong>Ajouter</strong>. L'appli apparaît avec les autres et marche même hors connexion.</li>
+      </ol>
+      <form method="dialog">
+        <button type="submit" class="btn">Compris</button>
+      </form>
+    </dialog>
+
+    <script type="module" src="./js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+{
+  "name": "LizParKs · Parcs d'attraction",
+  "short_name": "LizParKs",
+  "description": "La checklist des parcs d'attraction du monde entier : coche ceux que tu as faits, suis ton budget et fête chaque visite avec un feu d'artifice.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "lang": "fr",
+  "dir": "ltr",
+  "categories": ["travel", "entertainment", "lifestyle"],
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./screenshots/mobile-checklist.jpg",
+      "sizes": "412x915",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "La checklist des parcs, avec recherche, filtres et progression"
+    },
+    {
+      "src": "./screenshots/mobile-recap.jpg",
+      "sizes": "412x915",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Le récap budget des parcs visités"
+    },
+    {
+      "src": "./screenshots/desktop-checklist.jpg",
+      "sizes": "1280x800",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "La checklist sur grand écran"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Récap budget",
+      "short_name": "Récap",
+      "url": "./#recap",
+      "icons": [{ "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png" }]
+    }
+  ]
+}

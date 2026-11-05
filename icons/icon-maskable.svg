@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Maskable variant of icon.svg: full-bleed background, artwork shrunk into the 80 % safe zone. -->
+  <rect width="512" height="512" fill="#0a0a0a"/>
+  <polygon points="0,300 512,220 512,512 0,512" fill="#e10600"/>
+  <g transform="translate(256 256) scale(0.66) translate(-256 -256)">
+    <g fill="none" stroke="#f5f0e6" stroke-width="20" stroke-linecap="round">
+      <circle cx="256" cy="230" r="150"/>
+      <line x1="256" y1="80" x2="256" y2="380"/>
+      <line x1="106" y1="230" x2="406" y2="230"/>
+      <line x1="152" y1="126" x2="360" y2="334"/>
+      <line x1="360" y1="126" x2="152" y2="334"/>
+    </g>
+    <circle cx="256" cy="230" r="28" fill="#f5f0e6"/>
+    <polygon points="40,420 70,380 100,420 130,380 160,420 190,380 220,420 250,380 280,420 310,380 340,420 370,380 400,420 430,380 460,420 472,404 472,470 40,470" fill="#0a0a0a"/>
+  </g>
+</svg>
